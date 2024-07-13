@@ -3,10 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Simple Site</title>
+    <title>Menu Translator</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sheetId = 'YOUR_SHEET_ID';
+            const apiKey = 'AIzaSyDhqKzC7Da41TBGMPy5JKZ0k9hAbRf8M_0';
+            const range = 'Sheet1!A1:H'; // Adjust the range as needed
+
+            fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    const rows = data.values;
+                    let html = '<table>';
+                    if (rows.length > 0) {
+                        // Add table headers
+                        html += '<tr>';
+                        rows[0].forEach(header => {
+                            html += `<th>${header}</th>`;
+                        });
+                        html += '</tr>';
+                        // Add table rows
+                        rows.slice(1).forEach(row => {
+                            html += '<tr>';
+                            row.forEach(cell => {
+                                html += `<td>${cell || ''}</td>`;
+                            });
+                            html += '</tr>';
+                        });
+                    }
+                    html += '</table>';
+                    document.getElementById('sheet-data').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        });
+    </script>
 </head>
 <body>
-    <h1>Hello World</h1>
-    <p>Welcome to my simple website.</p>
+    <h1>Menu Translator</h1>
+    <div id="sheet-data"></div>
 </body>
 </html>
