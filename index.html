@@ -17,19 +17,30 @@
         th {
             background-color: #f2f2f2;
         }
+        #status {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        function fetchData() {
             const sheetId = '1do2TOAURvOoBi9pyodLmJBa3IbiVXzeJ6-96gHiAMF8';  // Your actual Sheet ID
             const apiKey = 'aadd767be2022dcab4ec766cab8c65ff4af8a8f2';  // Your actual API Key
             const range = 'Sheet1!A1:H'; // Adjust the range as needed
+
+            document.getElementById('status').innerText = 'Fetching data...';
+            document.getElementById('sheet-data').innerHTML = '';
 
             fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`)
                 .then(response => response.json())
                 .then(data => {
                     const rows = data.values;
                     let html = '<table>';
-                    if (rows.length > 0) {
+                    if (rows && rows.length > 0) {
                         // Add table headers
                         html += '<tr>';
                         rows[0].forEach(header => {
@@ -47,15 +58,19 @@
                     }
                     html += '</table>';
                     document.getElementById('sheet-data').innerHTML = html;
+                    document.getElementById('status').innerText = 'Data fetched successfully!';
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
+                    document.getElementById('status').innerText = 'Error fetching data';
                 });
-        });
+        }
     </script>
 </head>
 <body>
     <h1>Menu Translator</h1>
+    <button onclick="fetchData()">Fetch Data</button>
+    <div id="status"></div>
     <div id="sheet-data"></div>
 </body>
 </html>
