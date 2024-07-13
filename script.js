@@ -99,6 +99,6 @@ function fetchData(sheetName) {
     })
     .catch((error) => {
       console.error("Error fetching data:", error); // Log any errors
-      document.getElementById("status").innerText = "Error fetching data"; // Update status message on error
+      document.getElementById("status").innerText = "Error fetching data"; // Update status message on erro r
     });
 }
