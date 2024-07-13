@@ -26,42 +26,19 @@
         font-size: 16px;
         cursor: pointer;
       }
-      #sheet-list {
-        margin: 20px 0;
-      }
     </style>
     <script>
       function fetchData() {
         const sheetId = "1do2TOAURvOoBi9pyodLmJBa3IbiVXzeJ6-96gHiAMF8"; // Your actual Sheet ID
         const apiKey = "aadd767be2022dcab4ec766cab8c65ff4af8a8f2"; // Your actual API Key
+        const range = "Sheet1!A1:H"; // Adjust the range as needed
 
         document.getElementById("status").innerText = "Fetching data...";
         document.getElementById("sheet-data").innerHTML = "";
-        document.getElementById("spreadsheet-name").innerText = "";
-        document.getElementById("sheet-list").innerHTML = "";
 
         fetch(
-          `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?key=${apiKey}`
+          `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`
         )
-          .then((response) => response.json())
-          .then((data) => {
-            const spreadsheetName = data.properties.title;
-            const sheets = data.sheets.map((sheet) => sheet.properties.title);
-
-            document.getElementById(
-              "spreadsheet-name"
-            ).innerText = `Spreadsheet: ${spreadsheetName}`;
-            document.getElementById("sheet-list").innerHTML =
-              "<strong>Sheets:</strong><ul>" +
-              sheets.map((sheet) => `<li>${sheet}</li>`).join("") +
-              "</ul>";
-
-            const range = `${sheets[0]}!A1:H`; // Adjust the range as needed
-
-            return fetch(
-              `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`
-            );
-          })
           .then((response) => response.json())
           .then((data) => {
             const rows = data.values;
@@ -98,8 +75,6 @@
     <h1>Menu Translator</h1>
     <button onclick="fetchData()">Fetch Data</button>
     <div id="status"></div>
-    <div id="spreadsheet-name"></div>
-    <div id="sheet-list"></div>
     <div id="sheet-data"></div>
   </body>
 </html>
