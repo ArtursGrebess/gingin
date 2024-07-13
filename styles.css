@@ -1,0 +1,142 @@
+@font-face {
+  font-family: "Montserrat Alternates", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&display=swap");
+}
+
+body {
+  font-family: "Montserrat Alternates", sans-serif;
+  line-height: 1.4;
+  color: #333;
+  margin: 0;
+  padding: 10px;
+  background-color: #e0f0e0;
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.menu-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 15px;
+  text-align: left;
+  width: 100%;
+  white-space: normal;
+}
+
+.menu-item div {
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+
+.menu-item-name {
+  font-weight: bold;
+  flex: 1 1 auto;
+}
+
+.menu-item-description {
+  font-style: italic;
+  flex: 2 1 auto;
+}
+
+.dietary-info {
+  font-weight: normal;
+  flex: 1 1 auto;
+}
+
+.menu-item-options {
+  font-weight: normal;
+  flex: 1 1 auto;
+}
+
+.menu-item-price {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.section-header {
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.menu-note {
+  font-weight: bold;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.language-bar {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 1000;
+}
+
+.language-bar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+.language-bar a:hover,
+.language-bar a.active {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.content {
+  margin-top: 60px;
+  padding: 0 10px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .language-bar a {
+    margin: 0 5px;
+    font-size: 12px;
+  }
+
+  .menu-item {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .menu-item div {
+    flex: 100%;
+    margin-right: 0;
+  }
+
+  .menu-item-price {
+    text-align: right;
+    width: 100%;
+  }
+}
+
+.menu-item i {
+  font-style: italic;
+  color: #666; /* You can adjust this color as needed */
+}
